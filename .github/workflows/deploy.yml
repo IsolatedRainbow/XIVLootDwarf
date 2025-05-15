@@ -4,21 +4,17 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:  # This allows manual triggering
+  workflow_dispatch:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -31,17 +27,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: List frontend files
-        run: |
-          echo "Listing frontend directory contents:"
-          ls -la frontend/
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend
-          publish_branch: gh-pages
-          commit_message: "Deploy frontend to GitHub Pages"
-          force_orphan: true 
+          folder: frontend
+          branch: gh-pages
+          clean: true 
