@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# Loot Tracker
+# XIVLootDwarf
 
 A web application for tracking and announcing loot drops in games, similar to raid-helper.dev's functionality.
 
@@ -43,7 +42,5 @@ loot-tracker/
 The application is automatically deployed to GitHub Pages when changes are pushed to the main branch.
 
 ## Contributing
-Feel free to submit issues and enhancement requests! 
-=======
-# XIVLootDwarf
->>>>>>> 37cea4931458fdbb7456431d7832d8690c611612
+Feel free to submit issues and enhancement requests!
+
