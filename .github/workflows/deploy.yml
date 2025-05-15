@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
@@ -25,9 +27,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: List frontend files
+        run: |
+          echo "Listing frontend directory contents:"
+          ls -la frontend/
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./frontend
-          publish_branch: gh-pages 
+          publish_branch: gh-pages
+          commit_message: "Deploy frontend to GitHub Pages" 
